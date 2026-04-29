@@ -1,25 +1,16 @@
 # Cloudflare Pages Configuration
 # Deploy this project to Cloudflare Pages using GitHub integration
 
-name: Cloud API
-main: src/main/java/com/example/api/CloudApiApplication.java
-compatibility_date: 2024-01-01
+name = "cloud-api"
+compatibility_date = "2024-01-01"
 
-# Build configuration for Cloudflare Pages
-build:
-  command: mvn clean package
-  cwd: ./
-  root_dir: target
+# No build command needed - JAR is pre-built by GitHub Actions
+# See .github/workflows/build-and-deploy.yml for build process
 
 # Environment variables for production deployment
-env:
-  production:
-    vars:
-      SERVER_PORT: "8080"
-      ENVIRONMENT: "production"
-      LOG_LEVEL: "INFO"
+[env.production]
+vars = { SERVER_PORT = "8080", ENVIRONMENT = "production", LOG_LEVEL = "INFO" }
 
-# Cloudflare Workers binding (if using Workers as a proxy)
-workers:
-  service: cloud-api
-  environment: production
+# Observability settings
+[observability]
+enabled = true
